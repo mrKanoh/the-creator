@@ -1,0 +1,8 @@
+# Tras compactación o chat nuevo
+
+Fase de la skill del orquestador: la lees cuando `SKILL.md` lo pide; las reglas de `SKILL.md` siguen rigiendo.
+
+**Cada vez que recomiendes abrir un chat nuevo** (al cerrar un ciclo, tras compactación, por tamaño del contexto o por una tarea no relacionada), entrega en ese mensaje un solo bloque de código listo para pegar, que empiece con `/orquestador` e incluya: la tarea siguiente (de `PROGRESS.md` o la que el responsable nombró; **«Estoy suponiendo»** si la elegiste tú), el estado real verificado con git (rama principal y último commit, ramas `tarea/*` pendientes, worktrees), trabajadores abiertos o archivados, tareas lanzadas sin el responsable: n, decisiones y restricciones vigentes. Con «no» en el proyecto, el bloque no fija «fusiona el responsable» como salida: remite a `C:\repos\creador\skills\orquestador\cerrar-no.md`. Entrégalo aunque puedas abrir la sesión tú.
+
+1. **Compactación o señal en este chat:** espera a que tu trabajador cierre la etapa en curso y lee `C:\repos\creador\templates\orquestador-referencia.md` § «Traspaso por compactación» para redactar y abrir el orquestador nuevo. Avisa al responsable y no avances otra etapa.
+2. **Chat nuevo que retoma:** relee `PROGRESS.md` (modo paralelo: `progress/<id>.md`; orden completa y línea `Ciclo`), `git log --oneline -n 10` y `git status --short --branch`, no tu memoria; sigue la cuenta de tareas lanzadas sin el responsable del traspaso. Lanza un trabajador nuevo «desde la etapa N» solo si el anterior ya no trabaja (archivado o inactivo); si sigue activo, deténlo con las herramientas de sesiones o pídele al responsable que lo archive: nunca dos trabajadores en la misma rama.

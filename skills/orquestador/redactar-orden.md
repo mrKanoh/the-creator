@@ -1,0 +1,17 @@
+# Redactar una orden para el trabajador
+
+Fase de la skill del orquestador: la lees cuando `SKILL.md` lo pide; las reglas de `SKILL.md` siguen rigiendo.
+
+Usa `C:\repos\creador\templates\orden.md`: autocontenida, con identificador corto (p. ej. `PW-SEO-BASE-1`). En modo automático la envías tú; en modo manual, en un solo bloque de código. Marca suposiciones con **«Estoy suponiendo»**.
+
+Si la orden pide escribir o revisar contenido de un sitio web (textos de páginas, títulos, descripciones), indica al trabajador leer `C:\repos\creador\templates\contenido-web.md`, aunque el sitio no se publique.
+
+Toda orden de implementación incluye: rama `tarea/<nombre>` desde la rama principal actualizada, un commit local por etapa verificada y actualizar `PROGRESS.md`. Push de esa rama, su PR, borrar sus ramas ya fusionadas y, al cierre, cuando el orquestador lo indique con la compuerta pasada, la limpieza que ordene (salir de `tarea/<id>` con `git switch --detach` en worktree o `git switch <principal>` sin él, y actualizar la principal en la carpeta principal, `git -C <carpeta principal> …`, con el comando exacto que le des y la ruta con barras normales, `C:/repos/…`, que funcionan en Bash y en PowerShell) van siempre en «Autorizado». El id de una orden nueva no puede existir ya: compruébalo con `git log --all --grep <id>` (coincide con prefijos: `CRE-X-1` encuentra `CRE-X-10`; revisa a mano cada coincidencia) y en `progress/archivo.md`. Si existe, elige otro y avisa al responsable si el id vino de él.
+
+Si la orden fija qué filas exactas quedan en «Terminados» (no basta un recorte a N filas), declara en ella la excepción: la fila de la tarea no se agrega y el commit de cierre y el PR nombran el id y el valor del auditor (compuerta de `C:\repos\creador\skills\orquestador\cerrar.md`, paso 2). Anota el hash de `origin/<principal>` con que la redactaste y pide al trabajador comprobarlo (`git fetch`, luego `git rev-parse origin/<principal>`) antes del commit de cierre y detenerse a avisarte si cambió.
+
+**Lanzar con worktree** (lo exige el `CLAUDE.md` del proyecto, o `git status --short --branch` de la carpeta principal muestra cambios ajenos u otra rama): lanza con `use_worktree: true`; si este chat no está en la raíz del repo (`git rev-parse --show-toplevel`), pasa esa raíz como `cwd` (en landing-cliente, con el chat en la carpeta padre del repo, la app no creó el worktree). La orden remite a `C:\repos\creador\templates\paralelo.md` §3 para prepararlo (dependencias, `.env`, `.claude/worktrees/` en `.gitignore`) y pide al trabajador informar al empezar `git rev-parse --show-toplevel` y `git branch --show-current`. Antes de aprobar la primera etapa, compruébalo tú con `git worktree list`; si el trabajador quedó en la carpeta principal, ordénale no editar y detente a avisar al responsable.
+
+Si es el primer trabajo en el proyecto, la primera etapa registra la **línea base de pruebas** (qué pasa y qué falla hoy, por nombre); sin pruebas, indícalo y exige verificación manual con evidencia.
+
+**Ramas pendientes.** Si hay ramas `tarea/*` con trabajo aprobado y sin fusionar (`git branch --no-merged <principal>`): abre su PR si no lo tiene (ver «Cerrar el ciclo», en `C:\repos\creador\skills\orquestador\cerrar.md`). La tarea nueva parte de la principal si es independiente; si depende de lo pendiente, parte de esa rama y la orden y el PR lo dicen. Nunca apiles solo por evitar conflictos en `PROGRESS.md`.

@@ -1,0 +1,17 @@
+{
+  "name": "creador",
+  "description": "Mods del método de trabajo del responsable (repo Creador).",
+  "owner": { "name": "mrKanoh" },
+  "plugins": [
+    {
+      "name": "guardia",
+      "source": "./guardia",
+      "description": "Frena gh pr create con PROGRESS.md sin cerrar y las ediciones en skills/ de la carpeta principal de Creador."
+    },
+    {
+      "name": "tablero",
+      "source": "./tablero",
+      "description": "Panel de solo lectura con el estado de PROGRESS.md (hecho, en curso, por hacer) del proyecto abierto."
+    }
+  ]
+}
